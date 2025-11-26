@@ -1,12 +1,14 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useContext } from 'react';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import auth from '../firebase/firebase.config';
 import { AuthContext } from '../Provider/AuthProvider';
 import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
     const { setUser, handleGoogleSignIn } = useContext(AuthContext);
+    const location = useLocation();
+    //  console.log(location);
     const handleLogin = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
