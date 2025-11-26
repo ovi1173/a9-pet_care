@@ -9,7 +9,7 @@ const Login = () => {
     const { setUser, handleGoogleSignIn } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
-    const [email,setEmail] = useState('');
+    const [email, setEmail] = useState('');
 
     //  console.log(location);
     const handleLogin = (e) => {
@@ -21,7 +21,7 @@ const Login = () => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 setUser(user);
-                navigate(location.state? location.state : '/');
+                navigate(location.state ? location.state : '/');
             })
             .catch(error => {
                 console.log(error);
@@ -38,41 +38,70 @@ const Login = () => {
             .catch(error => console.log(error))
     }
 
-   const handleForget =()=>{
-    navigate(`/forget-pass/${email}`)
-   }
+    const handleForget = () => {
+        navigate(`/forget-pass/${email}`)
+    }
 
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                <div className="card max-w-2xl mx-auto bg-white shadow-2xl rounded-xl p-8 mt-10">
                     <div className="card-body">
-                        <h1 className="text-3xl font-bold">Login now!</h1>
-                        <form onSubmit={handleLogin} className="fieldset">
+                        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Login now!</h1>
+                        <form onSubmit={handleLogin} className="space-y-4">
 
-                            {/* email */}
-                            <label className="label">Email</label>
-                            <input onChange={(e)=>setEmail(e.target.value)} type="email" className="input" name='email' placeholder="Email" />
-                            {/* password */}
-                            <label className="label">Password</label>
-                            <input type="password" name='password' className="input" placeholder="Password" />
-
-                            
-                                
-                         <button onClick={googleSignIn} className='btn'><FcGoogle></FcGoogle></button>
-                                
-                            
-                            <button onClick={handleForget}>
-                                   <a className="link link-hover">Forgot password?</a>
-                                </button>
-
-                            <div>
-                                <span>Don't have an account?</span> <Link to='/register' className='text-red-500'>Register</Link>
+                            {/* Email */}
+                            <div className="flex flex-col">
+                                <label className="label text-gray-700 font-medium">Email</label>
+                                <input
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    type="email"
+                                    name='email'
+                                    placeholder="Enter your email"
+                                    className="input input-bordered input-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                                />
                             </div>
-                            <button className="btn btn-neutral mt-4">Login</button>
+
+                            {/* Password */}
+                            <div className="flex flex-col">
+                                <label className="label text-gray-700 font-medium">Password</label>
+                                <input
+                                    type="password"
+                                    name='password'
+                                    placeholder="Enter your password"
+                                    className="input input-bordered input-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                                />
+                            </div>
+
+                            {/* Google Sign-in */}
+                            <button
+                                type="button"
+                                onClick={googleSignIn}
+                                className='btn btn-outline w-full flex items-center justify-center gap-2 mt-2 hover:bg-blue-50 transition'>
+                                <FcGoogle className="text-xl" /> Sign in with Google
+                            </button>
+
+                            {/* Forgot password */}
+                            <div className="text-right mt-2">
+                                <button type="button" onClick={handleForget} className="link link-hover text-sm text-blue-500 hover:text-blue-700">
+                                    Forgot password?
+                                </button>
+                            </div>
+
+                            {/* Register link */}
+                            <div className="text-center text-gray-600 mt-2">
+                                <span>Don't have an account? </span>
+                                <Link to='/register' className='text-red-500 font-medium hover:underline'>Register</Link>
+                            </div>
+
+                            {/* Submit button */}
+                            <button className="btn btn-neutral w-full mt-4 rounded-lg hover:bg-gray-700 hover:text-white transition">
+                                Login
+                            </button>
                         </form>
                     </div>
                 </div>
+
             </div>
         </div>
     );

@@ -51,31 +51,82 @@ const Register = () => {
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                <div className="card max-w-md mx-auto bg-white shadow-2xl rounded-xl p-8 mt-10">
                     <div className="card-body">
-                        <h1 className="text-3xl font-bold">Register now!</h1>
-                        <form onSubmit={handleSubmit} className="fieldset">
-                            {/* name */}
-                            <label className="label">Name</label>
-                            <input type="text" className="input" name='name' placeholder="Name" />
-                            {/* photo url */}
-                            <label className="label">Photo URL</label>
-                            <input type="text" name='photourl' className="input" placeholder="Photo URL" />
-                            {/* email */}
-                            <label className="label">Email</label>
-                            <input type="email" className="input" name='email' placeholder="Email" />
-                            {/* password */}
-                            <label className="label">Password</label>
-                            <input type="password" name='password' className="input" placeholder="Password" />
-                            <button onClick={googleSignUp} className='btn'><FcGoogle></FcGoogle></button>
-                            <div><a className="link link-hover">Forgot password?</a></div>
-                            <div>
-                                <span>Already have an account?</span> <Link to='/login' className='text-red-500'>Login</Link>
+                        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Register now!</h1>
+                        <form onSubmit={handleSubmit} className="space-y-4">
+
+                            {/* Name */}
+                            <div className="flex flex-col">
+                                <label className="label text-gray-700 font-medium">Name</label>
+                                <input
+                                    type="text"
+                                    name='name'
+                                    placeholder="Enter your name"
+                                    className="input input-bordered input-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                                />
                             </div>
-                            <button className="btn btn-neutral mt-4">Register</button>
+
+                            {/* Photo URL */}
+                            <div className="flex flex-col">
+                                <label className="label text-gray-700 font-medium">Photo URL</label>
+                                <input
+                                    type="text"
+                                    name='photourl'
+                                    placeholder="Enter photo URL"
+                                    className="input input-bordered input-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                                />
+                            </div>
+
+                            {/* Email */}
+                            <div className="flex flex-col">
+                                <label className="label text-gray-700 font-medium">Email</label>
+                                <input
+                                    type="email"
+                                    name='email'
+                                    placeholder="Enter your email"
+                                    className="input input-bordered input-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                                />
+                            </div>
+
+                            {/* Password */}
+                            <div className="flex flex-col">
+                                <label className="label text-gray-700 font-medium">Password</label>
+                                <input
+                                    type="password"
+                                    name='password'
+                                    placeholder="Enter your password"
+                                    className="input input-bordered input-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                                />
+                            </div>
+
+                            {/* Google Sign-up */}
+                            <button
+                                type="button"
+                                onClick={googleSignUp}
+                                className='btn btn-outline w-full flex items-center justify-center gap-2 mt-2 hover:bg-blue-50 transition'>
+                                <FcGoogle className="text-xl" /> Sign up with Google
+                            </button>
+
+                            {/* Forgot password */}
+                            <div className="text-right mt-2">
+                                <a className="link link-hover text-sm text-blue-500 hover:text-blue-700">Forgot password?</a>
+                            </div>
+
+                            {/* Login link */}
+                            <div className="text-center text-gray-600 mt-2">
+                                <span>Already have an account? </span>
+                                <Link to='/login' className='text-red-500 font-medium hover:underline'>Login</Link>
+                            </div>
+
+                            {/* Submit button */}
+                            <button className="btn btn-neutral w-full mt-4 rounded-lg hover:bg-gray-700 hover:text-white transition">
+                                Register
+                            </button>
                         </form>
                     </div>
                 </div>
+
             </div>
         </div>
     );
