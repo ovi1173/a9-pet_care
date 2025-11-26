@@ -1,0 +1,98 @@
+[
+  {
+    "serviceId": 1,
+    "serviceName": "Winter Coat Fitting for Dogs",
+    "providerName": "PawCare Studio",
+    "providerEmail": "info@pawcare.com",
+    "price": 25,
+    "rating": 4.9,
+    "slotsAvailable": 4,
+    "description": "Custom coat fitting and warm outfit options to keep your dog comfortable in the cold.",
+    "image": "https://i.postimg.cc/ht9B1MrB/dog-coat.jpg",
+    "category": "Clothing"
+  },
+  {
+    "serviceId": 2,
+    "serviceName": "Winter Grooming & Paw Treatment",
+    "providerName": "CozyPets Grooming",
+    "providerEmail": "hello@cozypets.com",
+    "price": 30,
+    "rating": 4.8,
+    "slotsAvailable": 3,
+    "description": "Professional grooming with moisturizing paw balm and winter-safe shampoo.",
+    "image": "https://i.postimg.cc/YC1Hz83w/paw.webp",
+    "category": "Grooming"
+  },
+  {
+    "serviceId": 3,
+    "serviceName": "Warm Bedding Setup for Cats",
+    "providerName": "Feline Comfort Hub",
+    "providerEmail": "support@felinecomfort.com",
+    "price": 20,
+    "rating": 4.7,
+    "slotsAvailable": 5,
+    "description": "Soft heated bedding setup to keep your cat warm during cold nights.",
+    "image": "https://i.postimg.cc/Sx049HcZ/warm.jpg",
+    "category": "Bedding"
+  },
+  {
+    "serviceId": 4,
+    "serviceName": "Winter Health Checkup for Pets",
+    "providerName": "NorthVet Clinic",
+    "providerEmail": "contact@northvet.com",
+    "price": 40,
+    "rating": 4.9,
+    "slotsAvailable": 2,
+    "description": "Comprehensive winter-season health checkup to ensure your pet stays safe and healthy.",
+    "image": "https://i.postimg.cc/mgx49KQT/checkup.jpg",
+    "category": "Health"
+  },
+  {
+    "serviceId": 5,
+    "serviceName": "Indoor Play & Exercise Session",
+    "providerName": "HappyPaws Activity Center",
+    "providerEmail": "play@happypaws.com",
+    "price": 15,
+    "rating": 4.6,
+    "slotsAvailable": 6,
+    "description": "Fun indoor exercise activities designed for winter days when outdoor play isn't ideal.",
+    "image": "https://i.postimg.cc/mgQsyVwf/exercise.webp",
+    "category": "Activity"
+  },
+  {
+    "serviceId": 6,
+    "serviceName": "Winter Nutrition Consultation",
+    "providerName": "HealthyPet Foods",
+    "providerEmail": "nutrition@healthypet.com",
+    "price": 22,
+    "rating": 4.8,
+    "slotsAvailable": 4,
+    "description": "Get expert advice on maintaining proper winter nutrition for your pet.",
+    "image": "https://i.postimg.cc/mgx49KQZ/neutrition.webp",
+    "category": "Nutrition"
+  },
+  {
+    "serviceId": 7,
+    "serviceName": "Snow Safety Training for Dogs",
+    "providerName": "OutdoorPaws Training",
+    "providerEmail": "trainer@outdoorpaws.com",
+    "price": 35,
+    "rating": 4.9,
+    "slotsAvailable": 3,
+    "description": "Teach your dog essential snow safety skills and cold-weather behavior training.",
+    "image": "https://i.postimg.cc/example7.png",
+    "category": "Training"
+  },
+  {
+    "serviceId": 8,
+    "serviceName": "Heated Pet House Installation",
+    "providerName": "WarmNest Builders",
+    "providerEmail": "service@warmnest.com",
+    "price": 50,
+    "rating": 5.0,
+    "slotsAvailable": 2,
+    "description": "Installation of insulated, heated pet houses perfect for extreme winter conditions.",
+    "image": "https://i.postimg.cc/example8.png",
+    "category": "Shelter"
+  }
+]
