@@ -6,14 +6,25 @@ import { updateProfile } from 'firebase/auth';
 import { FcGoogle } from 'react-icons/fc';
 
 const Register = () => {
-    const { RegisterWithEmailPassword, user, setUser ,handleGoogleSignIn} = useContext(AuthContext);
+    const { RegisterWithEmailPassword, user, setUser, handleGoogleSignIn } = useContext(AuthContext);
     const handleSubmit = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const pass = e.target.password.value;
         const name = e.target.name.value;
         const photourl = e.target.photourl.value;
-        console.log(name, pass, photourl, email)
+        const uppercase = /[A-Z]/;
+        const lowercase = /[a-z]/;
+        if (pass.length < 6) {
+            return alert("less than 6 character")
+        }
+        if (!uppercase.test(pass)) {
+            return alert("need a uppercase");
+        }
+        if (!lowercase.test(pass)) {
+            return alert("need a lowercase");
+        }
+        // console.log(name, pass, photourl, email)
         RegisterWithEmailPassword(email, pass)
             .then((userCredential) => {
                 updateProfile(auth.currentUser, {
@@ -28,7 +39,7 @@ const Register = () => {
             .catch(err => console.log(err))
     }
     // console.log(user)
-      const googleSignUp = () => {
+    const googleSignUp = () => {
         handleGoogleSignIn()
             .then(result => {
                 const user = result.user;

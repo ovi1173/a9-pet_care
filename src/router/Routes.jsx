@@ -7,11 +7,14 @@ import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import PrivateRoute from "./PrivateRoute";
 import ServiceDetails from "../pages/ServiceDetails";
+import ForgetPass from "../pages/ForgetPass";
+import ErrorPage from "../pages/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <RootLayout></RootLayout>,
+        errorElement:<ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',
@@ -40,6 +43,10 @@ const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <ServiceDetails></ServiceDetails>
                 </PrivateRoute>
+            },
+            {
+                path:'/forget-pass/:email',
+                element:<ForgetPass></ForgetPass>
             }
         ]
     },
