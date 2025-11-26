@@ -3,16 +3,17 @@ import { Link } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import auth from '../firebase/firebase.config';
 import { updateProfile } from 'firebase/auth';
+import { FcGoogle } from 'react-icons/fc';
 
 const Register = () => {
-    const { RegisterWithEmailPassword ,user,setUser} = useContext(AuthContext);
+    const { RegisterWithEmailPassword, user, setUser ,handleGoogleSignIn} = useContext(AuthContext);
     const handleSubmit = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const pass = e.target.password.value;
         const name = e.target.name.value;
         const photourl = e.target.photourl.value;
-        console.log(name,pass,photourl,email)
+        console.log(name, pass, photourl, email)
         RegisterWithEmailPassword(email, pass)
             .then((userCredential) => {
                 updateProfile(auth.currentUser, {
@@ -27,6 +28,14 @@ const Register = () => {
             .catch(err => console.log(err))
     }
     // console.log(user)
+      const googleSignUp = () => {
+        handleGoogleSignIn()
+            .then(result => {
+                const user = result.user;
+                setUser(user);
+            })
+            .catch(error => console.log(error))
+    }
 
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -47,7 +56,7 @@ const Register = () => {
                             {/* password */}
                             <label className="label">Password</label>
                             <input type="password" name='password' className="input" placeholder="Password" />
-
+                            <button onClick={googleSignUp} className='btn'><FcGoogle></FcGoogle></button>
                             <div><a className="link link-hover">Forgot password?</a></div>
                             <div>
                                 <span>Already have an account?</span> <Link to='/login' className='text-red-500'>Login</Link>

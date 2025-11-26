@@ -3,9 +3,10 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router';
 import auth from '../firebase/firebase.config';
 import { AuthContext } from '../Provider/AuthProvider';
+import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
-    const { setUser,user } = useContext(AuthContext);
+    const { setUser, handleGoogleSignIn } = useContext(AuthContext);
     const handleLogin = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -16,12 +17,22 @@ const Login = () => {
                 const user = userCredential.user;
                 setUser(user);
             })
-            .catch(error =>{
+            .catch(error => {
                 console.log(error);
             })
 
     }
-    console.log(user)
+
+    const googleSignIn = () => {
+        handleGoogleSignIn()
+            .then(result => {
+                const user = result.user;
+                setUser(user);
+            })
+            .catch(error => console.log(error))
+    }
+
+
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -38,6 +49,7 @@ const Login = () => {
                             <input type="password" name='password' className="input" placeholder="Password" />
 
                             <div><a className="link link-hover">Forgot password?</a></div>
+                            <button onClick={googleSignIn} className='btn'><FcGoogle></FcGoogle></button>
                             <div>
                                 <span>Don't have an account?</span> <Link to='/register' className='text-red-500'>Register</Link>
                             </div>
