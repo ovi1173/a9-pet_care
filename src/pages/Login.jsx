@@ -99,7 +99,6 @@ const Login = () => {
                                 <Link to='/register' className='text-red-500 font-medium hover:underline'>Register</Link>
                             </div>
 
-                            {/* Submit button */}
                             <button className="btn btn-neutral w-full mt-4 rounded-lg hover:bg-gray-700 hover:text-white transition">
                                 Login
                             </button>
