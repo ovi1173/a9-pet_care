@@ -1,12 +1,16 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import auth from '../firebase/firebase.config';
 import { updateProfile } from 'firebase/auth';
 import { FcGoogle } from 'react-icons/fc';
+import toast from 'react-hot-toast';
 
 const Register = () => {
     const { RegisterWithEmailPassword, user, setUser, handleGoogleSignIn } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+  
     const handleSubmit = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -16,27 +20,35 @@ const Register = () => {
         const uppercase = /[A-Z]/;
         const lowercase = /[a-z]/;
         if (pass.length < 6) {
-            return alert("less than 6 character")
+            return toast.error("Password must be at least 6 characters");
         }
         if (!uppercase.test(pass)) {
-            return alert("need a uppercase");
+            return toast.error("Password must include at least one uppercase letter");
         }
         if (!lowercase.test(pass)) {
-            return alert("need a lowercase");
+            return toast.error("Password must include at least one lowercase letter");
         }
         // console.log(name, pass, photourl, email)
         RegisterWithEmailPassword(email, pass)
             .then((userCredential) => {
                 updateProfile(auth.currentUser, {
-                    displayName: name, photoURL: photourl
-                }).then(() => {
-                    setUser(userCredential.user)
-                }).catch((error) => {
-                    console.log(error)
-                });
-
+                    displayName: name,
+                    photoURL: photourl
+                })
+                    .then(() => {
+                        setUser(userCredential.user);
+                        toast.success('Registration successful!');
+                        navigate(location.state?.from || '/');
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        toast.error(error.message || 'Profile update failed.');
+                    });
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+                toast.error(err.message || 'Registration failed.');
+            })
     }
     // console.log(user)
     const googleSignUp = () => {
@@ -44,8 +56,12 @@ const Register = () => {
             .then(result => {
                 const user = result.user;
                 setUser(user);
+                toast.success(`Welcome, ${user.displayName || 'User'}!`);
+                navigate(location.state?.from || '/');
             })
             .catch(error => console.log(error))
+        // eslint-disable-next-line no-undef
+        toast.error(error.message || 'Google Sign-Up failed.');
     }
 
     return (

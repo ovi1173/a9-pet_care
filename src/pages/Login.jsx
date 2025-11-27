@@ -4,14 +4,13 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import auth from '../firebase/firebase.config';
 import { AuthContext } from '../Provider/AuthProvider';
 import { FcGoogle } from 'react-icons/fc';
-
+import toast from 'react-hot-toast';
 const Login = () => {
     const { setUser, handleGoogleSignIn } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
 
-    //  console.log(location);
     const handleLogin = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -21,10 +20,12 @@ const Login = () => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 setUser(user);
-                navigate(location.state ? location.state : '/');
+                toast.success('Login successful!');
+                navigate(location.state?.from || '/');
             })
             .catch(error => {
                 console.log(error);
+                toast.error(error.message || 'Login failed. Please try again.');
             })
 
     }
@@ -34,10 +35,14 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 setUser(user);
+                toast.success(`Welcome, ${user.displayName || 'User'}!`);
+                navigate(location.state?.from || '/');
             })
-            .catch(error => console.log(error))
-    }
-
+            .catch(error => {
+                console.log(error);
+                toast.error(error.message || 'Google Sign-In failed.');
+            });
+    };
     const handleForget = () => {
         navigate(`/forget-pass/${email}`)
     }

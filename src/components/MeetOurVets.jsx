@@ -26,7 +26,7 @@ const MeetOurVets = () => {
         }
     ];
     return (
-      <div className="px-4 sm:px-10 lg:px-20 py-10">
+      <div className="px-4 sm:px-10 lg:px-20 pb-10">
     <h2 className="my-8 text-center text-3xl font-bold text-gray-800">
         Meet Our Expert Vets
     </h2>

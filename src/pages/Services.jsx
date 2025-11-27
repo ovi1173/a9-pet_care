@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 
 const Services = () => {
     const [services, setServices] = useState([]);
-
     useEffect(() => {
         fetch('/pet_data.json')
             .then(res => res.json())
@@ -14,7 +13,7 @@ const Services = () => {
 
     return (
         <div className='px-20 mt-8'>
-            <div className='grid grid-cols-3 gap-4'>
+            <div className='grid grid-cols-3 gap-20'>
 
                 {services.map(service => (
                     <motion.div

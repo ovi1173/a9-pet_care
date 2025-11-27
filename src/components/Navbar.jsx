@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import logo from '../assets/logo.png';
-import { Link } from 'react-router'; 
+import { NavLink } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import { signOut } from 'firebase/auth';
 import auth from '../firebase/firebase.config';
@@ -12,9 +12,13 @@ const Navbar = () => {
         signOut(auth);
     };
 
+    const activeClass = ({ isActive }) =>
+        isActive
+            ? "text-blue-600 font-semibold border-b-2 border-blue-600 pb-1"
+            : "hover:text-blue-500 transition-colors";
+
     return (
         <div className="navbar bg-white shadow-md sticky top-0 z-50 px-6 py-3">
-            {/* Navbar Start */}
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -28,65 +32,58 @@ const Navbar = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
                         </svg>
                     </label>
+
                     <ul
                         tabIndex={-1}
                         className="menu menu-sm dropdown-content mt-2 p-2 shadow bg-white rounded-box w-52"
                     >
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/services">Services</Link>
-                        </li>
-                        <li>
-                            <Link to="/my-profile">My Profile</Link>
-                        </li>
+                        <li><NavLink to="/" className={activeClass}>Home</NavLink></li>
+                        <li><NavLink to="/services" className={activeClass}>Services</NavLink></li>
+                        <li><NavLink to="/my-profile" className={activeClass}>My Profile</NavLink></li>
                     </ul>
                 </div>
-                <Link to="/" className="btn btn-ghost normal-case text-xl">
+
+                <NavLink to="/" className="btn btn-ghost normal-case text-xl">
                     <img className="w-40" src={logo} alt="Logo" />
-                </Link>
+                </NavLink>
             </div>
 
-            {/* Navbar Center */}
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 space-x-4 font-medium text-gray-700">
-                    <li>
-                        <Link to="/" className="hover:text-blue-500 transition-colors">
-                            Home
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/services" className="hover:text-blue-500 transition-colors">
-                            Services
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/my-profile" className="hover:text-blue-500 transition-colors">
-                            My Profile
-                        </Link>
-                    </li>
+                    <li><NavLink to="/" className={activeClass}>Home</NavLink></li>
+                    <li><NavLink to="/services" className={activeClass}>Services</NavLink></li>
+                    <li><NavLink to="/my-profile" className={activeClass}>My Profile</NavLink></li>
                 </ul>
             </div>
 
-            {/* Navbar End */}
-            <div className="navbar-end">
+            <div className="navbar-end flex items-center space-x-4">
                 {user ? (
-                    <button
-                        onClick={handleSignOut}
-                        className="btn btn-outline btn-primary rounded-lg hover:bg-primary hover:text-white transition"
-                    >
-                        Logout
-                    </button>
+                    <>
+                        <button onClick={handleSignOut} className="btn btn-outline btn-primary rounded-lg hover:bg-primary hover:text-white transition" >
+                            Logout
+                        </button>
+
+                        <div className="relative group cursor-pointer">
+                            <div className="avatar">
+                                <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                    <img src={user?.photoURL} alt="User" />
+                                </div>
+                            </div>
+
+                            <div className="absolute -left-40 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition bg-gray-800 text-white text-sm px-3 py-1 rounded shadow-lg whitespace-nowrap">
+                                {user?.displayName}
+                            </div>
+                        </div>
+                    </>
                 ) : (
-                    <Link
-                        to="/login"
-                        className="btn btn-primary rounded-lg hover:bg-blue-600 transition"
-                    >
+                    <NavLink to="/login" className="btn btn-primary rounded-lg hover:bg-blue-600 transition">
                         Login
-                    </Link>
+                    </NavLink>
                 )}
             </div>
+
+
+
         </div>
     );
 };
