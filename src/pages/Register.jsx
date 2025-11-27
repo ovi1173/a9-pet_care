@@ -1,16 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../Provider/AuthProvider';
 import auth from '../firebase/firebase.config';
 import { updateProfile } from 'firebase/auth';
 import { FcGoogle } from 'react-icons/fc';
 import toast from 'react-hot-toast';
-
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'; 
 const Register = () => {
     const { RegisterWithEmailPassword, user, setUser, handleGoogleSignIn } = useContext(AuthContext);
+    const [showPassword, setShowPassword] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
-  
+
+    const togglePassword = () => setShowPassword(prev => !prev);
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
@@ -106,14 +110,20 @@ const Register = () => {
                             </div>
 
                             {/* Password */}
-                            <div className="flex flex-col">
+                            <div className="flex flex-col relative">
                                 <label className="label text-gray-700 font-medium">Password</label>
                                 <input
-                                    type="password"
-                                    name='password'
+                                    type={showPassword ? "text" : "password"}
+                                    name="password"
                                     placeholder="Enter your password"
-                                    className="input input-bordered input-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                                    className="input input-bordered input-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent pr-10"
                                 />
+                                <span
+                                    onClick={togglePassword}
+                                    className="absolute right-3 top-8 cursor-pointer text-gray-500 text-xl"
+                                >
+                                    {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+                                </span>
                             </div>
 
                             {/* Google Sign-up */}

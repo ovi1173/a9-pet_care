@@ -4,12 +4,18 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import auth from '../firebase/firebase.config';
 import { AuthContext } from '../Provider/AuthProvider';
 import { FcGoogle } from 'react-icons/fc';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'; 
 import toast from 'react-hot-toast';
+
 const Login = () => {
     const { setUser, handleGoogleSignIn } = useContext(AuthContext);
+    const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState('');
+
     const location = useLocation();
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
+
+    const togglePassword = () => setShowPassword(prev => !prev);
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -21,33 +27,32 @@ const Login = () => {
                 const user = userCredential.user;
                 setUser(user);
                 toast.success('Login successful!');
-                 navigate( location.state);
+                
+                navigate(location.state);
             })
             .catch(error => {
                 console.log(error);
                 toast.error(error.message || 'Login failed. Please try again.');
-            })
-
-    }
+            });
+    };
 
     const googleSignIn = () => {
         handleGoogleSignIn()
             .then(result => {
                 const user = result.user;
                 setUser(user);
-                navigate( location.state);
                 toast.success(`Welcome, ${user.displayName || 'User'}!`);
-            
-
+                navigate(location.state);
             })
             .catch(error => {
                 console.log(error);
                 toast.error(error.message || 'Google Sign-In failed.');
             });
     };
+
     const handleForget = () => {
-        navigate(`/forget-pass/${email}`)
-    }
+        navigate(`/forget-pass/${email}`);
+    };
 
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -56,7 +61,6 @@ const Login = () => {
                     <div className="card-body">
                         <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Login now!</h1>
                         <form onSubmit={handleLogin} className="space-y-4">
-
                             {/* Email */}
                             <div className="flex flex-col">
                                 <label className="label text-gray-700 font-medium">Email</label>
@@ -70,14 +74,20 @@ const Login = () => {
                             </div>
 
                             {/* Password */}
-                            <div className="flex flex-col">
+                            <div className="flex flex-col relative">
                                 <label className="label text-gray-700 font-medium">Password</label>
                                 <input
-                                    type="password"
-                                    name='password'
+                                    type={showPassword ? "text" : "password"}
+                                    name="password"
                                     placeholder="Enter your password"
-                                    className="input input-bordered input-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+                                    className="input input-bordered input-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent pr-10"
                                 />
+                                <span
+                                    onClick={togglePassword}
+                                    className="absolute right-3 top-8 cursor-pointer text-gray-500 text-xl"
+                                >
+                                    {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+                                </span>
                             </div>
 
                             {/* Google Sign-in */}
@@ -107,7 +117,6 @@ const Login = () => {
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
     );

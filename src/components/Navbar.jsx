@@ -70,7 +70,7 @@ const Navbar = () => {
                                 </div>
                             </div>
 
-                            <div className="absolute -left-40 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition bg-gray-800 text-white text-sm px-3 py-1 rounded shadow-lg whitespace-nowrap">
+                            <div className="absolute -left-30 top-15 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition bg-gray-800 text-white text-sm px-3 py-1 rounded shadow-lg whitespace-nowrap">
                                 {user?.displayName}
                             </div>
                         </div>
