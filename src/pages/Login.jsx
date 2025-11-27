@@ -21,7 +21,7 @@ const Login = () => {
                 const user = userCredential.user;
                 setUser(user);
                 toast.success('Login successful!');
-                navigate(location.state?.from || '/');
+                 navigate( location.state);
             })
             .catch(error => {
                 console.log(error);
@@ -35,8 +35,10 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 setUser(user);
+                navigate( location.state);
                 toast.success(`Welcome, ${user.displayName || 'User'}!`);
-                navigate(location.state?.from || '/');
+            
+
             })
             .catch(error => {
                 console.log(error);
